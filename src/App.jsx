@@ -9,24 +9,24 @@ const mockData = [
     id: 0,
     isDone: false,
     content: "React 공부하기",
-    date: new Date().getDate(),
+    date: new Date().getTime(),
   },
   {
     id: 1,
     isDone: false,
     content: "청소하기",
-    date: new Date().getDate(),
+    date: new Date().getTime(),
   },
   {
     id: 2,
     isDone: false,
     content: "노래 연습하기",
-    date: new Date().getDate(),
+    date: new Date().getTime(),
   },
 ];
 
 function App() {
-  const [todos, setTodos] = useState([mockData]);
+  const [todos, setTodos] = useState(mockData);
   const idRef = useRef(3);
 
   const onCreate = (content) => {
@@ -44,7 +44,7 @@ function App() {
     <div className="App">
       <Header />
       <Editor onCreate={onCreate} />
-      <List />
+      <List todos={todos} />
     </div>
   );
 }
