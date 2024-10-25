@@ -1,4 +1,5 @@
 import "./TodoItem.css";
+import { memo } from "react";
 
 const TodoItem = ({ id, isDone, content, date, onUpdate, onDelete }) => {
   const onChangeCheckbox = () => {
@@ -23,4 +24,16 @@ const TodoItem = ({ id, isDone, content, date, onUpdate, onDelete }) => {
   );
 };
 
-export default TodoItem;
+// 고차 컴포넌트 (HOC)
+export default memo(TodoItem, (prevProps, nextProps) => {
+  // 반환값에 따라, Props가 바뀌었는지 바뀌지 않았는지 판단
+  // T -> Props 바뀌지 않음 -> 리렌더링 x
+  // F -> Props 바뀜 -> 리렌더링 o
+
+  if (prevProps.id !== nextProps.id) return false;
+  if (prevProps.isDone !== nextProps.isDone) return false;
+  if (prevProps.content !== nextProps.content) return false;
+  if (prevProps.date !== nextProps.date) return false;
+
+  return true;
+});
